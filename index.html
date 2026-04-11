@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #1E0A4A;
+    --purple: #7C3AED;
+    --teal: #0891B2;
+    --teal-light: #22D3EE;
+    --lilac: #C4B5FD;
+    --bg: #0A0514;
+    --bg2: #110827;
+    --card: #180D35;
+    --border: #2D1B69;
+    --text: #E2E8F0;
+    --muted: #94A3B8;
+    --block: #1A0E3A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at -5% 0%, rgba(124,58,237,0.30) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 55% at 105% 100%, rgba(8,145,178,0.24) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 24px 0 0;
+    position: relative;
+    z-index: 10;
+  }
+  .lang-toggle {
+    display: flex;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .lang-btn {
+    padding: 7px 18px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all .2s;
+    border: none;
+    background: none;
+    letter-spacing: .05em;
+  }
+  .lang-btn.active {
+    background: var(--purple);
+    color: #fff;
+    border-radius: 999px;
+  }
+  .hero {
+    padding: 56px 0 48px;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: var(--lilac);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    letter-spacing: .08em;
+    margin-bottom: 24px;
+    animation: fadeUp .5s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: .3; }
+  }
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(52px, 9vw, 82px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -.01em;
+    animation: fadeUp .5s .1s ease both;
+  }
+  h1 .accent { color: var(--purple); }
+  .hero-sub {
+    margin-top: 16px;
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.45;
+    max-width: 620px;
+    animation: fadeUp .5s .2s ease both;
+  }
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+    animation: fadeUp .5s .3s ease both;
+  }
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-size: 13.5px;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color .2s, transform .2s;
+  }
+  .contact-chip:hover {
+    border-color: var(--purple);
+    transform: translateY(-2px);
+  }
+  .contact-chip svg { flex-shrink: 0; }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 13.5px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity .2s, transform .2s;
+    letter-spacing: .02em;
+  }
+  .btn-download:hover { opacity: .88; transform: translateY(-2px); }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 8px 0 40px;
+  }
+  .section { margin-bottom: 44px; animation: fadeUp .5s ease both; }
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--teal);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .profile-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 680px;
+    border-left: 2px solid var(--purple);
+    padding-left: 18px;
+  }
+  .job {
+    background: var(--block);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    transition: border-color .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .job::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--purple), var(--teal));
+    border-radius: 3px 0 0 3px;
+  }
+  .job:hover { border-color: var(--purple); }
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .job-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .job-date {
+    font-size: 12.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .job-company {
+    font-size: 13.5px;
+    color: var(--purple);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .job-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .job-bullets li {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+  .job-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 10px;
+  }
+  .skill-card {
+    background: var(--block);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    transition: border-color .2s, transform .2s;
+  }
+  .skill-card:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .skill-label {
+    font-size: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .skill-value {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 560px) { .edu-grid { grid-template-columns: 1fr; } }
+  .edu-card {
+    background: var(--block);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .edu-year {
+    font-size: 11px;
+    color: var(--teal);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    letter-spacing: .1em;
+    margin-bottom: 4px;
+  }
+  .edu-title { font-size: 13.5px; color: var(--text); margin-bottom: 3px; }
+  .edu-place { font-size: 12px; color: var(--muted); }
+  .courses-list { display: flex; flex-direction: column; gap: 10px; }
+  .course-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--block);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+  }
+  .course-year {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .course-name { color: var(--text); flex: 1; }
+  .course-place { color: var(--muted); font-size: 12px; }
+  footer {
+    padding: 32px 0 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12.5px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section:nth-child(1) { animation-delay: .15s; }
+  .section:nth-child(2) { animation-delay: .25s; }
+  .section:nth-child(3) { animation-delay: .35s; }
+  .section:nth-child(4) { animation-delay: .45s; }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag" data-en="Open to work" data-ru="В поиске работы">Open to work</div>
+    <h1>
+      <span data-en="Vitaly" data-ru="Виталий">Vitaly</span><br>
+      <span class="accent" data-en="Vasilchenko" data-ru="Васильченко">Vasilchenko</span>
+    </h1>
+    <p class="hero-sub"
+       data-en="Technical Support Specialist (L1–L2) · Fintech &amp; Crypto · Remote"
+       data-ru="Специалист технической поддержки (L1–L2) · Финтех и Крипто · Удалённо">
+      Technical Support Specialist (L1–L2) · Fintech &amp; Crypto · Remote
+    </p>
+    <div class="hero-contacts">
+      <a class="contact-chip" href="mailto:moichilab@gmail.com">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        moichilab@gmail.com
+      </a>
+      <a class="contact-chip" href="https://t.me/qbwrkr" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+        @qbwrkr
+      </a>
+      <a class="btn-download" href="vitalyv_cv_en.pdf" download
+         data-en="Download CV (EN)" data-ru="Скачать резюме (EN)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Download CV (EN)</span>
+      </a>
+      <a class="btn-download" href="vitalyv_cv_ru.pdf" download
+         data-en="Download CV (RU)" data-ru="Скачать резюме (RU)"
+         style="background: linear-gradient(135deg, #2D1B69, #0891B2);">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Download CV (RU)</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROFILE -->
+  <div class="section">
+    <div class="section-label" data-en="Profile" data-ru="О себе">Profile</div>
+    <p class="profile-text"
+       data-en="Technical Support Specialist with experience in fintech, web3, and information security. 
+Worked with transaction-based systems (deposits, withdrawals, conversions, API integrations) 
+and handled complex L2 incidents including stuck transactions, API errors, and refunds.
+
+Skilled in log analysis, SQL, API debugging (Postman), and monitoring tools such as Grafana and Zabbix. 
+Additional background in security operations (SOC).
+
+Currently developing towards infrastructure roles: DevOps, SRE, and automation. 
+Looking for a remote L1/L2 support or related technical position in an international project, 
+with growth opportunities in Operations. Available for contract-based work (self-employed / freelance)."
+       data-ru="Специалист технической поддержки с опытом в fintech, web3 и информационной безопасности. 
+Работал с транзакционными системами (депозиты, выводы, конверсии, API-интеграции) 
+и разбирал сложные L2-инциденты: зависшие транзакции, ошибки API, рефанды.
+
+Владею анализом логов, SQL, отладкой API (Postman) и инструментами мониторинга (Grafana, Zabbix). 
+Имею дополнительный опыт в области информационной безопасности (SOC).
+
+Развиваюсь в сторону инфраструктурных ролей: DevOps, SRE, автоматизация. 
+Ищу удалённую позицию L1/L2 или смежную техническую роль в международном проекте 
+с возможностью роста в Operations. Работаю по самозанятости/ГПХ.">
+      1.5+ years in technical support for fintech and crypto projects. Handled L2 incidents: stuck transactions, API errors, refunds. Worked with logs, SQL queries, monitoring (Grafana, Zabbix), and API debugging via Postman. Additional SOC background. Looking for L1/L2 or technical support roles, with a long-term focus on DevOps, SRE, and infrastructure.
+    </p>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-label" data-en="Experience" data-ru="Опыт работы">Experience</div>
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title" data-en="L2 Engineer" data-ru="Инженер L2">L2 Engineer</div>
+        <div class="job-date" data-en="Jan 2026 – Apr 2026" data-ru="Январь 2026 – Апрель 2026">Jan 2026 – Apr 2026</div>
+      </div>
+      <div class="job-company" data-en="Evercode Lab (ChangeNOW) — Remote" data-ru="Evercode Lab (ChangeNOW) — удалённо">Evercode Lab (ChangeNOW) — Remote</div>
+      <ul class="job-bullets">
+        <li data-en="Investigated complex incidents: stuck transactions, conversion errors, refunds, partner API failures" data-ru="Разбор сложных инцидентов: зависшие транзакции, ошибки конверсий, рефанды, сбои партнёрских API">Investigated complex incidents: stuck transactions, conversion errors, refunds, partner API failures</li>
+        <li data-en="Root-cause analysis via PostgreSQL, Grafana, Zabbix logs, and Postman" data-ru="Поиск причин через PostgreSQL, логи Grafana / Zabbix и Postman">Root-cause analysis via PostgreSQL, Grafana, Zabbix logs, and Postman</li>
+        <li data-en="Escalated to L3/dev with detailed reproduction steps and log excerpts" data-ru="Эскалация на L3 и разработку с детальным описанием и логами">Escalated to L3/dev with detailed reproduction steps and log excerpts</li>
+        <li data-en="Technical bridge between Dev, QA, Compliance, and Account Management" data-ru="Связующее звено между Dev, QA, Compliance и Account Management">Technical bridge between Dev, QA, Compliance, and Account Management</li>
+        <li data-en="Contributed to support workflow improvements and automation proposals" data-ru="Участвовал в улучшении процессов поддержки и предложениях по автоматизации">Contributed to support workflow improvements and automation proposals</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title" data-en="L1 Support Specialist" data-ru="Специалист поддержки L1">L1 Support Specialist</div>
+        <div class="job-date" data-en="Mar 2025 – Jan 2026" data-ru="Март 2025 – Январь 2026">Mar 2025 – Jan 2026</div>
+      </div>
+      <div class="job-company" data-en="Evercode Lab (ChangeNOW) — Remote" data-ru="Evercode Lab (ChangeNOW) — удалённо">Evercode Lab (ChangeNOW) — Remote</div>
+      <ul class="job-bullets">
+        <li data-en="Handled user and partner requests (transactions, API questions) via chat" data-ru="Обрабатывал запросы пользователей и партнёров (транзакции, вопросы по API) в чате">Handled user and partner requests (transactions, API questions) via chat</li>
+        <li data-en="Initial diagnostics; escalated complex cases to L2/L3 and QA" data-ru="Первичная диагностика, эскалация сложных кейсов на L2/L3 и QA">Initial diagnostics; escalated complex cases to L2/L3 and QA</li>
+        <li data-en="Collaborated with Legal &amp; Compliance on AML-related cases" data-ru="Работал с Legal & Compliance по AML-кейсам">Collaborated with Legal &amp; Compliance on AML-related cases</li>
+        <li data-en="Maintained knowledge base; participated in onboarding new team members" data-ru="Поддерживал базу знаний, участвовал в онбординге новых сотрудников">Maintained knowledge base; participated in onboarding new team members</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title" data-en="SOC Analyst (L1)" data-ru="Аналитик SOC (L1)">SOC Analyst (L1)</div>
+        <div class="job-date" data-en="Jun 2024 – Nov 2024" data-ru="Июнь 2024 – Ноябрь 2024">Jun 2024 – Nov 2024</div>
+      </div>
+      <div class="job-company" data-en="NII Spetsvuzavtomatika — Rostov-on-Don" data-ru="ФГАНУ НИИ Спецвузавтоматика — Ростов-на-Дону">NII Spetsvuzavtomatika — Rostov-on-Don</div>
+      <ul class="job-bullets">
+        <li data-en="Monitored and triaged security alerts; SIEM: Komrad, Wazuh, MaxPatrol SIEM" data-ru="Мониторинг и разбор алертов ИБ; SIEM: Komrad, Wazuh, MaxPatrol SIEM">Monitored and triaged security alerts; SIEM: Komrad, Wazuh, MaxPatrol SIEM</li>
+        <li data-en="Web traffic analysis via PTAF; VM administration via VMware vCenter / SSH" data-ru="Анализ веб-трафика через PTAF, администрирование ВМ через VMware vCenter / SSH">Web traffic analysis via PTAF; VM administration via VMware vCenter / SSH</li>
+        <li data-en="Network perimeter monitoring: IP checks, account validation, anomaly detection" data-ru="Контроль сетевого периметра: проверка IP, учётных записей, поиск аномалий">Network perimeter monitoring: IP checks, account validation, anomaly detection</li>
+        <li data-en="Incident escalation and documentation in corporate knowledge base" data-ru="Эскалация инцидентов и ведение документации в корпоративной базе знаний">Incident escalation and documentation in corporate knowledge base</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-label" data-en="Skills" data-ru="Навыки">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-label" data-en="Database" data-ru="База данных">Database</div>
+        <div class="skill-value">SQL / PostgreSQL</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="API" data-ru="API">API</div>
+        <div class="skill-value">REST / Postman</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="Monitoring" data-ru="Мониторинг">Monitoring</div>
+        <div class="skill-value">Grafana / Zabbix</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="Security" data-ru="Безопасность">Security</div>
+        <div class="skill-value">Komrad / Wazuh / MaxPatrol / PTAF</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="Infrastructure" data-ru="Инфраструктура">Infrastructure</div>
+        <div class="skill-value">Linux / VMware vCenter / SSH</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="Tools" data-ru="Инструменты">Tools</div>
+        <div class="skill-value">Jira / Confluence / Blockchain Explorers</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="Domain" data-ru="Домен">Domain</div>
+        <div class="skill-value">Fintech / Crypto / Web3</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label" data-en="Languages" data-ru="Языки">Languages</div>
+        <div class="skill-value" data-en="English B2 / Russian Native" data-ru="Английский B2 / Русский родной">English B2 / Russian Native</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-label" data-en="Education" data-ru="Образование">Education</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-year">2021 – 2024</div>
+        <div class="edu-title"
+             data-en="Applied Mathematics & CS (Incomplete)"
+             data-ru="Прикладная математика и информатика (неоконченное высшее)">Applied Mathematics & CS (Incomplete)</div>
+        <div class="edu-place"
+             data-en="Southern Federal University"
+             data-ru="Южный федеральный университет">Southern Federal University</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSES -->
+  <div class="section">
+    <div class="section-label" data-en="Courses" data-ru="Курсы">Courses</div>
+    <div class="courses-list">
+      <div class="course-row">
+        <span class="course-year">2025</span>
+        <span class="course-name" data-en="DevOps Fundamentals" data-ru="Основы DevOps">DevOps Fundamentals</span>
+        <span class="course-place">Skillbox</span>
+      </div>
+      <div class="course-row">
+        <span class="course-year">2024</span>
+        <span class="course-name" data-en="Incident Response" data-ru="Реагирование на инциденты">Incident Response</span>
+        <span class="course-place">Codeby Academy</span>
+      </div>
+      <div class="course-row">
+        <span class="course-year">2023</span>
+        <span class="course-name" data-en="Bash & System Administration" data-ru="Bash и администрирование">Bash & System Administration</span>
+        <span class="course-place">Stepik</span>
+      </div>
+      <div class="course-row">
+        <span class="course-year">2023</span>
+        <span class="course-name" data-en="Linux Administration" data-ru="Linux. Введение в администрирование">Linux Administration</span>
+        <span class="course-place" data-en="SFU Digital Dept" data-ru="ЦК ЮФУ">SFU Digital Dept</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span data-en="Vitaly Vasilchenko · moichilab@gmail.com · @qbwrkr"
+          data-ru="Виталий Васильченко · moichilab@gmail.com · @qbwrkr">
+      Vitaly Vasilchenko · moichilab@gmail.com · @qbwrkr
+    </span>
+  </footer>
+</div>
+
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn')[lang === 'en' ? 0 : 1].classList.add('active');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute(`data-${lang}`);
+    if (val) el.textContent = val;
+  });
+}
+</script>
+<script>
+  setLang('en');
+</script>
+</body>
+</html>
