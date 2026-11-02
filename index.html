@@ -2,553 +2,210 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitaly Vasilchenko · Technical Support Engineer · Fintech &amp; Crypto</title>
+<meta name="description" content="Technical Support Engineer (L1–L2), fintech and crypto, remote. PostgreSQL, Grafana, Zabbix, Postman. Background in SOC. Open to work.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230D0F12'/%3E%3Crect x='4' y='4' width='8' height='8' fill='%23E0A030'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Три цвета. Всё остальное считается от них. */
   :root {
-    --violet: #1E0A4A;
-    --purple: #7C3AED;
-    --teal: #0891B2;
-    --teal-light: #22D3EE;
-    --lilac: #C4B5FD;
-    --bg: #0A0514;
-    --bg2: #110827;
-    --card: #180D35;
-    --border: #2D1B69;
-    --text: #E2E8F0;
-    --muted: #94A3B8;
-    --block: #1A0E3A;
+    --bg: #0D0F12;
+    --fg: #E8E6E1;
+    --ac: #E0A030;
+    --dim: color-mix(in srgb, var(--fg) 62%, var(--bg));
+    --line: color-mix(in srgb, var(--fg) 16%, var(--bg));
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'DM Sans', sans-serif;
+    font: 15px/1.65 'IBM Plex Sans', system-ui, sans-serif;
     background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+    color: var(--fg);
   }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at -5% 0%, rgba(124,58,237,0.30) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 55% at 105% 100%, rgba(8,145,178,0.24) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
+  a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+  a:hover { color: var(--ac); text-decoration-color: var(--ac); }
+  :focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 48px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; font-size: 13px; }
+  .status::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--ac); margin-right: 10px; }
+  .lang button {
+    font: inherit; background: none; border: 0; color: var(--dim);
+    cursor: pointer; padding: 2px 6px; letter-spacing: .06em;
   }
-  .container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
+  .lang button[aria-pressed="true"] { color: var(--ac); text-decoration: underline; text-underline-offset: 5px; }
+  .lang button:hover { color: var(--fg); }
+
+  header.hero { padding: 40px 0 48px; }
+  h1 { font-size: clamp(34px, 6vw, 54px); font-weight: 600; line-height: 1.08; letter-spacing: -.02em; }
+  .role { margin-top: 14px; font-size: 17px; color: var(--dim); }
+  .links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; }
+
+  section { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 32px 0; border-top: 1px solid var(--line); }
+  h2 { font: 500 12px/1.6 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--ac); padding-top: 3px; }
+
+  .profile { max-width: 66ch; white-space: pre-line; }
+
+  .job + .job { margin-top: 32px; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 16px; flex-wrap: wrap; }
+  h3 { font-size: 16px; font-weight: 600; }
+  .date { font-size: 13px; color: var(--dim); white-space: nowrap; }
+  .co { color: var(--dim); margin: 2px 0 12px; }
+  .job ul { list-style: none; }
+  .job li { position: relative; padding-left: 18px; margin-top: 5px; max-width: 70ch; }
+  .job li::before { content: '–'; position: absolute; left: 0; color: var(--dim); }
+
+  .kv { display: grid; grid-template-columns: 150px 1fr auto; gap: 4px 16px; padding: 9px 0; border-top: 1px solid var(--line); }
+  .kv:first-child { border-top: 0; padding-top: 0; }
+  .kv .k { font-size: 13px; color: var(--dim); }
+  .kv .p { font-size: 13px; color: var(--dim); text-align: right; }
+  .skills .kv { grid-template-columns: 150px 1fr; }
+
+  footer { padding-top: 24px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
+
+  @media (max-width: 700px) {
+    section { grid-template-columns: 1fr; gap: 14px; }
+    .kv, .skills .kv { grid-template-columns: 1fr; }
+    .kv .p { text-align: left; }
   }
-  nav {
-    display: flex;
-    justify-content: flex-end;
-    padding: 24px 0 0;
-    position: relative;
-    z-index: 10;
+  @media print {
+    :root { --bg: #fff; --fg: #000; --ac: #000; }
+    .top .lang { display: none; }
   }
-  .lang-toggle {
-    display: flex;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-  }
-  .lang-btn {
-    padding: 7px 18px;
-    cursor: pointer;
-    color: var(--muted);
-    transition: all .2s;
-    border: none;
-    background: none;
-    letter-spacing: .05em;
-  }
-  .lang-btn.active {
-    background: var(--purple);
-    color: #fff;
-    border-radius: 999px;
-  }
-  .hero {
-    padding: 56px 0 48px;
-    position: relative;
-  }
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(124,58,237,0.15);
-    border: 1px solid rgba(124,58,237,0.3);
-    border-radius: 999px;
-    padding: 5px 14px;
-    font-size: 12px;
-    color: var(--lilac);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    letter-spacing: .08em;
-    margin-bottom: 24px;
-    animation: fadeUp .5s ease both;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--teal-light);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity: 1; }
-    50% { opacity: .3; }
-  }
-  h1 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(52px, 9vw, 82px);
-    font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: -.01em;
-    animation: fadeUp .5s .1s ease both;
-  }
-  h1 .accent { color: var(--purple); }
-  .hero-sub {
-    margin-top: 16px;
-    font-size: 17px;
-    color: var(--muted);
-    line-height: 1.45;
-    max-width: 620px;
-    animation: fadeUp .5s .2s ease both;
-  }
-  .hero-contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-    animation: fadeUp .5s .3s ease both;
-  }
-  .contact-chip {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 9px 16px;
-    font-size: 13.5px;
-    color: var(--text);
-    text-decoration: none;
-    transition: border-color .2s, transform .2s;
-  }
-  .contact-chip:hover {
-    border-color: var(--purple);
-    transform: translateY(-2px);
-  }
-  .contact-chip svg { flex-shrink: 0; }
-  .btn-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, var(--purple), var(--teal));
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 13.5px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    text-decoration: none;
-    transition: opacity .2s, transform .2s;
-    letter-spacing: .02em;
-  }
-  .btn-download:hover { opacity: .88; transform: translateY(-2px); }
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 8px 0 40px;
-  }
-  .section { margin-bottom: 44px; animation: fadeUp .5s ease both; }
-  .section-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .18em;
-    color: var(--teal);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .profile-text {
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: var(--muted);
-    max-width: 680px;
-    border-left: 2px solid var(--purple);
-    padding-left: 18px;
-  }
-  .job {
-    background: var(--block);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px 24px;
-    margin-bottom: 14px;
-    transition: border-color .2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .job::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, var(--purple), var(--teal));
-    border-radius: 3px 0 0 3px;
-  }
-  .job:hover { border-color: var(--purple); }
-  .job-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-  .job-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .job-date {
-    font-size: 12.5px;
-    color: var(--muted);
-    white-space: nowrap;
-    margin-top: 2px;
-  }
-  .job-company {
-    font-size: 13.5px;
-    color: var(--purple);
-    margin-bottom: 14px;
-    font-weight: 500;
-  }
-  .job-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-  .job-bullets li {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.6;
-    padding-left: 16px;
-    position: relative;
-  }
-  .job-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--teal);
-  }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 10px;
-  }
-  .skill-card {
-    background: var(--block);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 13px 16px;
-    transition: border-color .2s, transform .2s;
-  }
-  .skill-card:hover { border-color: var(--purple); transform: translateY(-2px); }
-  .skill-label {
-    font-size: 10px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    letter-spacing: .12em;
-    color: var(--teal);
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-  .skill-value {
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.45;
-  }
-  .edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 560px) { .edu-grid { grid-template-columns: 1fr; } }
-  .edu-card {
-    background: var(--block);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .edu-year {
-    font-size: 11px;
-    color: var(--teal);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    letter-spacing: .1em;
-    margin-bottom: 4px;
-  }
-  .edu-title { font-size: 13.5px; color: var(--text); margin-bottom: 3px; }
-  .edu-place { font-size: 12px; color: var(--muted); }
-  .courses-list { display: flex; flex-direction: column; gap: 10px; }
-  .course-row {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    padding: 10px 14px;
-    background: var(--block);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 13.5px;
-  }
-  .course-year {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--teal);
-    white-space: nowrap;
-  }
-  .course-name { color: var(--text); flex: 1; }
-  .course-place { color: var(--muted); font-size: 12px; }
-  footer {
-    padding: 32px 0 40px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 12.5px;
-    border-top: 1px solid var(--border);
-    margin-top: 20px;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .section:nth-child(1) { animation-delay: .15s; }
-  .section:nth-child(2) { animation-delay: .25s; }
-  .section:nth-child(3) { animation-delay: .35s; }
-  .section:nth-child(4) { animation-delay: .45s; }
 </style>
 </head>
 <body>
-<div class="container">
-  <nav>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ru')">RU</button>
-    </div>
-  </nav>
+<div class="wrap">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-tag" data-en="Open to work" data-ru="В поиске работы">Open to work</div>
-    <h1>
-      <span data-en="Vitaly" data-ru="Виталий">Vitaly</span><br>
-      <span class="accent" data-en="Vasilchenko" data-ru="Васильченко">Vasilchenko</span>
-    </h1>
-    <p class="hero-sub"
-       data-en="Technical Support Specialist (L1–L2) · Fintech &amp; Crypto · Remote"
-       data-ru="Специалист технической поддержки (L1–L2) · Финтех и Крипто · Удалённо">
-      Technical Support Specialist (L1–L2) · Fintech &amp; Crypto · Remote
-    </p>
-    <div class="hero-contacts">
-      <a class="contact-chip" href="mailto:qbwrkr@gmail.com">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        qbwrkr@gmail.com
-      </a>
-      <a class="contact-chip" href="https://t.me/qbwrkr" target="_blank">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-        @qbwrkr
-      </a>
-      <a class="btn-download" href="vitalyv_cv_en.pdf" download
-         data-en="Download PDF (EN)" data-ru="Скачать PDF (EN)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Download PDF (EN)</span>
-      </a>
-      <a class="btn-download" href="vitalyv_cv_ru.pdf" download
-         data-en="Download PDF (RU)" data-ru="Скачать PDF (RU)"
-         style="background: linear-gradient(135deg, #2D1B69, #0891B2);">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Download PDF (RU)</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- PROFILE -->
-  <div class="section">
-    <div class="section-label" data-en="Profile" data-ru="О себе">Profile</div>
-    <p class="profile-text"
-       data-en="Technical Support Specialist with experience in fintech, web3, and information security. Worked with transaction-based systems (deposits, withdrawals, conversions, API integrations) and handled complex L2 incidents including stuck transactions, API errors, and refunds. Skilled in log analysis, SQL, API debugging (Postman), and monitoring (Grafana, Zabbix). Additional SOC background. Interested in automation — writing scripts to simplify workflows. Looking for a remote L1/L2 or adjacent technical role with growth into DevOps / SRE / infrastructure."
-       data-ru="Специалист технической поддержки с опытом в fintech, web3 и информационной безопасности. 
-Работал с транзакционными системами (депозиты, выводы, конверсии, API-интеграции) 
-и разбирал сложные L2-инциденты: зависшие транзакции, ошибки API, рефанды.
-
-Владею анализом логов, SQL, отладкой API (Postman) и инструментами мониторинга (Grafana, Zabbix). 
-Имею дополнительный опыт в области информационной безопасности (SOC).
-
-Развиваюсь в сторону инфраструктурных ролей: DevOps, SRE, автоматизация. 
-Ищу удалённую позицию L1/L2 или смежную техническую роль в международном проекте 
-с возможностью роста в Operations. Работаю по самозанятости/ГПХ.">
-      Technical Support Specialist with experience in fintech, web3, and information security. Worked with transaction-based systems (deposits, withdrawals, conversions, API integrations) and handled complex L2 incidents including stuck transactions, API errors, and refunds. Skilled in log analysis, SQL, API debugging (Postman), and monitoring (Grafana, Zabbix). Additional SOC background. Interested in automation — writing scripts to simplify workflows. Looking for a remote L1/L2 or adjacent technical role with growth into DevOps / SRE / infrastructure.
-    </p>
-  </div>
-
-<!-- EXPERIENCE -->
-  <div class="section">
-    <div class="section-label" data-en="Experience" data-ru="Опыт работы">Experience</div>
-    <div class="job">
-      <div class="job-header">
-        <div class="job-title" data-en="Technical Support Engineer (L1→L2)" data-ru="Инженер технической поддержки (L1→L2)">Technical Support Engineer (L1→L2)</div>
-        <div class="job-date" data-en="Mar 2025 – Apr 2026" data-ru="Март 2025 – Апрель 2026">Mar 2025 – Apr 2026</div>
-      </div>
-      <div class="job-company" data-en="Evercode Lab (ChangeNOW) — Remote" data-ru="Evercode Lab (ChangeNOW) — удалённо">Evercode Lab (ChangeNOW) — Remote</div>
-      <ul class="job-bullets">
-        <li data-en="Handled user and partner requests via Zendesk, Telegram, Slack (transactions, API questions)" data-ru="Обрабатывал обращения пользователей и партнёров через Zendesk, Telegram, Slack">Handled user and partner requests via Zendesk, Telegram, Slack (transactions, API questions)</li>
-        <li data-en="Initial diagnostics; escalated complex cases to L2/L3 and QA" data-ru="Первичная диагностика инцидентов, эскалация на L2/L3 и QA">Initial diagnostics; escalated complex cases to L2/L3 and QA</li>
-        <li data-en="Collaborated with Legal &amp; Compliance on AML-related cases" data-ru="Работал с Legal &amp; Compliance по AML-кейсам">Collaborated with Legal &amp; Compliance on AML-related cases</li>
-        <li data-en="Investigated complex L2 incidents: stuck transactions, conversion errors, refunds, partner API failures" data-ru="Разбор сложных L2-инцидентов: зависшие транзакции, ошибки конверсий, рефанды, сбои API">Investigated complex L2 incidents: stuck transactions, conversion errors, refunds, partner API failures</li>
-        <li data-en="Root-cause analysis via PostgreSQL, Grafana, Zabbix logs, and Postman" data-ru="Поиск первопричин через PostgreSQL, логи Grafana / Zabbix и Postman">Root-cause analysis via PostgreSQL, Grafana, Zabbix logs, and Postman</li>
-        <li data-en="Escalated to L3/dev with detailed reproduction steps and log excerpts" data-ru="Эскалация на L3 и в разработку с подробным описанием и шагами воспроизведения">Escalated to L3/dev with detailed reproduction steps and log excerpts</li>
-        <li data-en="Technical bridge between Dev, QA, Compliance, and Account Management" data-ru="Связующее звено между Dev, QA, Compliance и Account Management">Technical bridge between Dev, QA, Compliance, and Account Management</li>
-        <li data-en="Maintained knowledge base in Confluence; onboarded new team members" data-ru="Поддерживал базу знаний в Confluence, участвовал в обучении новых сотрудников">Maintained knowledge base in Confluence; onboarded new team members</li>
-        <li data-en="Contributed to support workflow improvements and automation proposals" data-ru="Участвовал в улучшении процессов поддержки, предлагал решения по автоматизации">Contributed to support workflow improvements and automation proposals</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-header">
-        <div class="job-title" data-en="SOC Analyst (L1)" data-ru="Аналитик SOC (L1)">SOC Analyst (L1)</div>
-        <div class="job-date" data-en="Jun 2024 – Nov 2024" data-ru="Июнь 2024 – Ноябрь 2024">Jun 2024 – Nov 2024</div>
-      </div>
-      <div class="job-company" data-en="NII Spetsvuzavtomatika — Rostov-on-Don" data-ru="ФГАНУ НИИ Спецвузавтоматика — Ростов-на-Дону">NII Spetsvuzavtomatika — Rostov-on-Don</div>
-      <ul class="job-bullets">
-        <li data-en="Monitored and triaged security alerts; SIEM: Wazuh, MaxPatrol SIEM, SearchInform" data-ru="Мониторинг и первичный разбор алертов ИБ; SIEM: Wazuh, MaxPatrol SIEM, SearchInform">Monitored and triaged security alerts; SIEM: Wazuh, MaxPatrol SIEM, SearchInform</li>
-        <li data-en="Administered KAV, KSMG, and honeypot traps; network traffic analysis via Netflow, Wireshark, PTAF" data-ru="Настройка KAV, KSMG и honeypot-ловушек; анализ трафика через Netflow, Wireshark, PTAF">Administered KAV, KSMG, and honeypot traps; network traffic analysis via Netflow, Wireshark, PTAF</li>
-        <li data-en="VM administration via VMware vSphere / SSH; network perimeter monitoring" data-ru="Администрирование ВМ через VMware vSphere и SSH; контроль сетевого периметра">VM administration via VMware vSphere / SSH; network perimeter monitoring</li>
-        <li data-en="Onboarded and trained new team members on SOC tools and workflows" data-ru="Обучал новых сотрудников работе с инструментами SOC">Onboarded and trained new team members on SOC tools and workflows</li>
-        <li data-en="Incident escalation and documentation in Jira, Confluence, Redmine" data-ru="Эскалация инцидентов, ведение документации в Jira, Confluence, Redmine">Incident escalation and documentation in Jira, Confluence, Redmine</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- SKILLS -->
-  <div class="section">
-    <div class="section-label" data-en="Skills" data-ru="Навыки">Skills</div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-label" data-en="Database" data-ru="База данных">Database</div>
-        <div class="skill-value">SQL / PostgreSQL</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="API" data-ru="API">API</div>
-        <div class="skill-value">REST / Postman</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="Monitoring" data-ru="Мониторинг">Monitoring</div>
-        <div class="skill-value">Grafana / Zabbix</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="Security" data-ru="Безопасность">Security</div>
-        <div class="skill-value">Komrad / Wazuh / MaxPatrol / PTAF / Wireshark</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="Infrastructure" data-ru="Инфраструктура">Infrastructure</div>
-        <div class="skill-value">Linux / VMware vSphere / SSH / Containers</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="Tools" data-ru="Инструменты">Tools</div>
-        <div class="skill-value">Jira / Confluence / Zendesk / Slack / Blockchain Explorers</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="Domain" data-ru="Домен">Domain</div>
-        <div class="skill-value">Fintech / Crypto / Web3</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-label" data-en="Languages" data-ru="Языки">Languages</div>
-        <div class="skill-value" data-en="English B2 / Russian Native" data-ru="Английский B2 / Русский родной">English B2 / Russian Native</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EDUCATION -->
-  <div class="section">
-    <div class="section-label" data-en="Education" data-ru="Образование">Education</div>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <div class="edu-year">2021 – 2024</div>
-        <div class="edu-title"
-             data-en="Applied Mathematics & CS (Incomplete)"
-             data-ru="Прикладная математика и информатика (неоконченное высшее)">Applied Mathematics & CS (Incomplete)</div>
-        <div class="edu-place"
-             data-en="Southern Federal University"
-             data-ru="Южный федеральный университет">Southern Federal University</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COURSES -->
-  <div class="section">
-    <div class="section-label" data-en="Courses" data-ru="Курсы">Courses</div>
-    <div class="courses-list">
-      <div class="course-row">
-        <span class="course-year">2025</span>
-        <span class="course-name" data-en="DevOps Fundamentals" data-ru="Основы DevOps">DevOps Fundamentals</span>
-        <span class="course-place">Skillbox</span>
-      </div>
-      <div class="course-row">
-        <span class="course-year">2024</span>
-        <span class="course-name" data-en="Incident Response" data-ru="Реагирование на инциденты">Incident Response</span>
-        <span class="course-place">Codeby Academy</span>
-      </div>
-      <div class="course-row">
-        <span class="course-year">2023</span>
-        <span class="course-name" data-en="Bash & System Administration" data-ru="Bash и администрирование">Bash & System Administration</span>
-        <span class="course-place">Stepik</span>
-      </div>
-      <div class="course-row">
-        <span class="course-year">2023</span>
-        <span class="course-name" data-en="Linux Administration" data-ru="Linux. Введение в администрирование">Linux Administration</span>
-        <span class="course-place" data-en="SFU Digital Dept" data-ru="ЦК ЮФУ">SFU Digital Dept</span>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <span data-en="Vitaly Vasilchenko · qbwrkr@gmail.com · @qbwrkr"
-          data-ru="Виталий Васильченко · qbwrkr@gmail.com · @qbwrkr">
-      Vitaly Vasilchenko · qbwrkr@gmail.com · @qbwrkr
+  <div class="top mono">
+    <span class="status" data-ru="В поиске работы">Open to work</span>
+    <span class="lang">
+      <button type="button" data-l="en" aria-pressed="true">EN</button>/<button type="button" data-l="ru" aria-pressed="false">RU</button>
     </span>
-  </footer>
+  </div>
+
+  <header class="hero">
+    <h1><span data-ru="Виталий">Vitaly</span> <span data-ru="Васильченко">Vasilchenko</span></h1>
+    <p class="role" data-ru="Специалист технической поддержки (L1–L2) · Финтех и Крипто · Удалённо">Technical Support Specialist (L1–L2) · Fintech &amp; Crypto · Remote</p>
+    <p class="links mono">
+      <a href="mailto:qbwrkr@gmail.com">qbwrkr@gmail.com</a>
+      <a href="https://t.me/qbwrkr" target="_blank" rel="noopener">t.me/qbwrkr</a>
+      <a href="vitalyv_cv_en.pdf" download data-ru="↓ Резюме PDF (EN)">↓ CV PDF (EN)</a>
+      <a href="vitalyv_cv_ru.pdf" download data-ru="↓ Резюме PDF (RU)">↓ CV PDF (RU)</a>
+    </p>
+  </header>
+
+  <section>
+    <h2 data-ru="О себе">Profile</h2>
+    <p class="profile" data-ru="Специалист технической поддержки с опытом в fintech, web3 и информационной безопасности. Работал с транзакционными системами (депозиты, выводы, конверсии, API-интеграции) и разбирал сложные L2-инциденты: зависшие транзакции, ошибки API, рефанды.
+
+Владею анализом логов, SQL, отладкой API (Postman) и инструментами мониторинга (Grafana, Zabbix). Имею дополнительный опыт в области информационной безопасности (SOC).
+
+Развиваюсь в сторону инфраструктурных ролей: DevOps, SRE, автоматизация. Ищу удалённую позицию L1/L2 или смежную техническую роль в международном проекте с возможностью роста в Operations. Работаю по самозанятости/ГПХ.">Technical Support Specialist with experience in fintech, web3, and information security. Worked with transaction-based systems (deposits, withdrawals, conversions, API integrations) and handled complex L2 incidents including stuck transactions, API errors, and refunds. Skilled in log analysis, SQL, API debugging (Postman), and monitoring (Grafana, Zabbix). Additional SOC background. Interested in automation — writing scripts to simplify workflows. Looking for a remote L1/L2 or adjacent technical role with growth into DevOps / SRE / infrastructure.</p>
+  </section>
+
+  <section>
+    <h2 data-ru="Опыт работы">Experience</h2>
+    <div>
+      <article class="job">
+        <div class="job-head">
+          <h3 data-ru="Инженер технической поддержки (L1→L2)">Technical Support Engineer (L1→L2)</h3>
+          <span class="date mono" data-ru="Март 2025 – Апрель 2026">Mar 2025 – Apr 2026</span>
+        </div>
+        <p class="co" data-ru="Evercode Lab (ChangeNOW) — удалённо">Evercode Lab (ChangeNOW) — Remote</p>
+        <ul>
+          <li data-ru="Обрабатывал обращения пользователей и партнёров через Zendesk, Telegram, Slack">Handled user and partner requests via Zendesk, Telegram, Slack (transactions, API questions)</li>
+          <li data-ru="Первичная диагностика инцидентов, эскалация на L2/L3 и QA">Initial diagnostics; escalated complex cases to L2/L3 and QA</li>
+          <li data-ru="Работал с Legal &amp; Compliance по AML-кейсам">Collaborated with Legal &amp; Compliance on AML-related cases</li>
+          <li data-ru="Разбор сложных L2-инцидентов: зависшие транзакции, ошибки конверсий, рефанды, сбои API">Investigated complex L2 incidents: stuck transactions, conversion errors, refunds, partner API failures</li>
+          <li data-ru="Поиск первопричин через PostgreSQL, логи Grafana / Zabbix и Postman">Root-cause analysis via PostgreSQL, Grafana, Zabbix logs, and Postman</li>
+          <li data-ru="Эскалация на L3 и в разработку с подробным описанием и шагами воспроизведения">Escalated to L3/dev with detailed reproduction steps and log excerpts</li>
+          <li data-ru="Связующее звено между Dev, QA, Compliance и Account Management">Technical bridge between Dev, QA, Compliance, and Account Management</li>
+          <li data-ru="Поддерживал базу знаний в Confluence, участвовал в обучении новых сотрудников">Maintained knowledge base in Confluence; onboarded new team members</li>
+          <li data-ru="Участвовал в улучшении процессов поддержки, предлагал решения по автоматизации">Contributed to support workflow improvements and automation proposals</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <div class="job-head">
+          <h3 data-ru="Аналитик SOC (L1)">SOC Analyst (L1)</h3>
+          <span class="date mono" data-ru="Июнь 2024 – Ноябрь 2024">Jun 2024 – Nov 2024</span>
+        </div>
+        <p class="co" data-ru="ФГАНУ НИИ Спецвузавтоматика — Ростов-на-Дону">NII Spetsvuzavtomatika — Rostov-on-Don</p>
+        <ul>
+          <li data-ru="Мониторинг и первичный разбор алертов ИБ; SIEM: Wazuh, MaxPatrol SIEM, SearchInform">Monitored and triaged security alerts; SIEM: Wazuh, MaxPatrol SIEM, SearchInform</li>
+          <li data-ru="Настройка KAV, KSMG и honeypot-ловушек; анализ трафика через Netflow, Wireshark, PTAF">Administered KAV, KSMG, and honeypot traps; network traffic analysis via Netflow, Wireshark, PTAF</li>
+          <li data-ru="Администрирование ВМ через VMware vSphere и SSH; контроль сетевого периметра">VM administration via VMware vSphere / SSH; network perimeter monitoring</li>
+          <li data-ru="Обучал новых сотрудников работе с инструментами SOC">Onboarded and trained new team members on SOC tools and workflows</li>
+          <li data-ru="Эскалация инцидентов, ведение документации в Jira, Confluence, Redmine">Incident escalation and documentation in Jira, Confluence, Redmine</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-ru="Навыки">Skills</h2>
+    <div class="skills">
+      <div class="kv"><span class="k mono" data-ru="База данных">Database</span><span>SQL / PostgreSQL</span></div>
+      <div class="kv"><span class="k mono">API</span><span>REST / Postman</span></div>
+      <div class="kv"><span class="k mono" data-ru="Мониторинг">Monitoring</span><span>Grafana / Zabbix</span></div>
+      <div class="kv"><span class="k mono" data-ru="Безопасность">Security</span><span>Komrad / Wazuh / MaxPatrol / PTAF / Wireshark</span></div>
+      <div class="kv"><span class="k mono" data-ru="Инфраструктура">Infrastructure</span><span>Linux / VMware vSphere / SSH / Containers</span></div>
+      <div class="kv"><span class="k mono" data-ru="Инструменты">Tools</span><span>Jira / Confluence / Zendesk / Slack / Blockchain Explorers</span></div>
+      <div class="kv"><span class="k mono" data-ru="Домен">Domain</span><span>Fintech / Crypto / Web3</span></div>
+      <div class="kv"><span class="k mono" data-ru="Языки">Languages</span><span data-ru="Английский B2 / Русский родной">English B2 / Russian Native</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-ru="Образование">Education</h2>
+    <div>
+      <div class="kv">
+        <span class="k mono">2021 – 2024</span>
+        <span data-ru="Прикладная математика и информатика (неоконченное высшее)">Applied Mathematics &amp; CS (Incomplete)</span>
+        <span class="p" data-ru="Южный федеральный университет">Southern Federal University</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-ru="Курсы">Courses</h2>
+    <div>
+      <div class="kv"><span class="k mono">2025</span><span data-ru="Основы DevOps">DevOps Fundamentals</span><span class="p">Skillbox</span></div>
+      <div class="kv"><span class="k mono">2024</span><span data-ru="Реагирование на инциденты">Incident Response</span><span class="p">Codeby Academy</span></div>
+      <div class="kv"><span class="k mono">2023</span><span data-ru="Bash и администрирование">Bash &amp; System Administration</span><span class="p">Stepik</span></div>
+      <div class="kv"><span class="k mono">2023</span><span data-ru="Linux. Введение в администрирование">Linux Administration</span><span class="p" data-ru="ЦК ЮФУ">SFU Digital Dept</span></div>
+    </div>
+  </section>
+
+  <footer class="mono">Vitaly Vasilchenko · qbwrkr@gmail.com · @qbwrkr</footer>
 </div>
 
+<script>
+(function () {
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-ru]'));
+  els.forEach(function (e) { e.setAttribute('data-en', e.textContent.trim()); });
 
-<script>
-function setLang(lang) {
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.lang-btn')[lang === 'en' ? 0 : 1].classList.add('active');
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const val = el.getAttribute(`data-${lang}`);
-    if (val) el.textContent = val;
+  function setLang(l) {
+    document.documentElement.lang = l;
+    els.forEach(function (e) { e.textContent = e.getAttribute('data-' + l); });
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-l') === l));
+    });
+    try { localStorage.setItem('lang', l); } catch (_) {}
+  }
+
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-l')); });
   });
-}
-</script>
-<script>
-  setLang('en');
+
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (_) {}
+  if (saved === 'ru') setLang('ru');
+})();
 </script>
 </body>
 </html>
