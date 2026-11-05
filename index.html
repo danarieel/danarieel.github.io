@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vitaly Vasilchenko · Technical Support Engineer · Fintech &amp; Crypto</title>
-<meta name="description" content="Technical Support Engineer (L1–L2), fintech and crypto, remote. PostgreSQL, Grafana, Zabbix, Postman. Background in SOC. Open to work.">
+<meta name="description" content="Technical Support Engineer (L1–L2), fintech and crypto, moving into infrastructure: Linux, Docker, PostgreSQL, Grafana, Bash. Background in SOC. Remote.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vitaly Vasilchenko · Technical Support Engineer → Infrastructure">
+<meta property="og:description" content="L1–L2 support in fintech and crypto, SOC background, building Linux / Docker / PostgreSQL / Grafana / Bash projects. Remote.">
+<meta property="og:url" content="https://danarieel.github.io/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230D0F12'/%3E%3Crect x='4' y='4' width='8' height='8' fill='%23E0A030'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,6 +97,7 @@
     <p class="links mono">
       <a href="mailto:qbwrkr@gmail.com">qbwrkr@gmail.com</a>
       <a href="https://t.me/qbwrkr" target="_blank" rel="noopener">t.me/qbwrkr</a>
+      <a href="https://github.com/danarieel" target="_blank" rel="noopener">github.com/danarieel</a>
       <a href="vitalyv_cv_en.pdf" download data-ru="↓ Резюме PDF (EN)">↓ CV PDF (EN)</a>
       <a href="vitalyv_cv_ru.pdf" download data-ru="↓ Резюме PDF (RU)">↓ CV PDF (RU)</a>
     </p>
@@ -100,15 +105,47 @@
 
   <section>
     <h2 data-ru="О себе">Profile</h2>
-    <p class="profile" data-ru="Специалист технической поддержки с опытом в fintech, web3 и информационной безопасности. Работал с транзакционными системами (депозиты, выводы, конверсии, API-интеграции) и разбирал сложные L2-инциденты: зависшие транзакции, ошибки API, рефанды.
+    <p class="profile" data-ru="Специалист технической поддержки в fintech и web3, есть опыт в SOC. Работал с транзакционными системами (депозиты, выводы, конверсии, API-интеграции) и разбирал сложные L2-инциденты: зависшие транзакции, ошибки API, рефанды.
 
-Целенаправленно двигаюсь в инфраструктуру: Linux, виртуализация, мониторинг, автоматизация рутины скриптами. Сейчас готовлю практические инфраструктурные проекты для GitHub.
+Перехожу в инфраструктуру и собираю практические проекты: Linux (systemd, nginx, cron), Docker Compose, PostgreSQL + Grafana, автоматизация на Bash. Ищу удалённую junior-роль в инфраструктуре или технических операциях, либо роль L2/ops-поддержки с ростом в инфраструктуру.">Technical Support Specialist in fintech and web3 with a SOC background. Worked on transaction systems (deposits, withdrawals, conversions, API integrations) and resolved complex L2 incidents: stuck transactions, API errors, refunds.
 
-Ищу удалённую позицию L1/L2 или смежную техническую роль в международном проекте с ростом в сторону инфраструктуры. Работаю по самозанятости/ГПХ.">Technical Support Specialist with experience in fintech, web3, and information security. Worked with transaction-based systems (deposits, withdrawals, conversions, API integrations) and handled complex L2 incidents including stuck transactions, API errors, and refunds.
+Moving into infrastructure and building hands-on projects: Linux (systemd, nginx, cron), Docker Compose, PostgreSQL + Grafana, Bash automation. Looking for a remote junior role in infrastructure or technical operations, or an L2/ops support role with a path into infrastructure.</p>
+  </section>
 
-Deliberately moving into infrastructure: Linux, virtualization, monitoring, and scripting to automate routine work. Currently preparing hands-on infrastructure projects for GitHub.
+  <section>
+    <h2 data-ru="Проекты">Projects</h2>
+    <div>
+      <article class="job">
+        <div class="job-head">
+          <h3><a href="https://github.com/danarieel/bash-report" target="_blank" rel="noopener">bash-report</a></h3>
+          <span class="date mono">2026</span>
+        </div>
+        <p class="co">Bash · awk · cron · github.com/danarieel/bash-report</p>
+        <ul>
+          <li data-ru="Скрипт сводки по access.log nginx: число запросов, коды ответов, топ URL и IP">Script that summarizes an nginx access.log: request count, status codes, top URLs and IPs</li>
+          <li data-ru="Запускается по расписанию через cron и пишет отчёт в файл">Runs on a schedule via cron and writes the report to a file</li>
+        </ul>
+      </article>
 
-Looking for a remote L1/L2 or adjacent technical role at an international company with a path into infrastructure. Available on a self-employed / contractor basis.</p>
+      <article class="job">
+        <div class="job-head">
+          <h3 data-ru="Домашняя лаборатория">Home lab</h3>
+          <span class="date mono" data-ru="2026 – н.в.">2026 – present</span>
+        </div>
+        <p class="co">Linux · OpenWrt · Docker · LXC</p>
+        <ul>
+          <li data-ru="Прошил домашний роутер на OpenWrt">Flashed a home router with OpenWrt</li>
+          <li data-ru="Запускал приложения в контейнерах: LXC на Linux, Docker на Windows">Ran apps in containers: LXC on Linux, Docker on Windows</li>
+        </ul>
+      </article>
+      <!-- Add after the repo is pushed with a README:
+      <article class="job">
+        <div class="job-head"><h3><a href="https://github.com/danarieel/REPO">PostgreSQL + Grafana in Docker Compose</a></h3><span class="date mono">2026</span></div>
+        <p class="co">Docker Compose · PostgreSQL · Grafana · SQL</p>
+        <ul><li data-ru="...">...</li></ul>
+      </article>
+      -->
+    </div>
   </section>
 
   <section>
@@ -116,39 +153,19 @@ Looking for a remote L1/L2 or adjacent technical role at an international compan
     <div>
       <article class="job">
         <div class="job-head">
-          <h3 data-ru="Самостоятельная практика">Independent Practice</h3>
-          <span class="date mono" data-ru="2026 – н.в.">2026 – present</span>
-        </div>
-        <p class="co" data-ru="Домашняя автоматизация и обучение">Home automation &amp; self-study</p>
-        <ul>
-          <li data-ru="Прошил домашний роутер на OpenWrt">Flashed a home router with OpenWrt</li>
-          <li data-ru="Перенёс и проанализировал базы фильмов и музыки для персонализации">Migrated and analyzed personal film and music databases for personalization</li>
-          <li data-ru="Скробблер Trakt: статус просмотра синхронизируется автоматически">Set up a Trakt scrobbler: watch status syncs automatically</li>
-          <li data-ru="Запускал приложения в контейнерах: LXC на Linux, Docker на Windows">Ran apps in containers: LXC on Linux, Docker on Windows</li>
-          <li data-ru="Изучаю Linux, Bash, Python; готовлю проекты для GitHub">Learning Linux, Bash, Python; infrastructure projects for GitHub in preparation</li>
-        </ul>
-      </article>
-
-      <article class="job">
-        <div class="job-head">
           <h3 data-ru="Инженер технической поддержки (L1→L2)">Technical Support Engineer (L1→L2)</h3>
           <span class="date mono" data-ru="Март 2025 – Апрель 2026">Mar 2025 – Apr 2026</span>
         </div>
         <p class="co" data-ru="Evercode Lab (ChangeNOW) — удалённо">Evercode Lab (ChangeNOW) — Remote</p>
         <ul>
-          <li data-ru="Обрабатывал обращения пользователей и партнёров через Zendesk, Telegram, Slack">Handled user and partner requests via Zendesk, Telegram, Slack (transactions, API questions)</li>
-          <li data-ru="30–50 обращений в день, до 80+ в пиковые дни; работал в SLA: первый ответ до 3 минут, последующие до 10">30–50 requests per day, 80+ on peak days; worked within SLA: first response up to 3 min, follow-ups up to 10 min</li>
-          <li data-ru="Первичная диагностика инцидентов, эскалация на L2/L3 и QA">Initial diagnostics; escalated complex cases to L2/L3 and QA</li>
-          <li data-ru="Работал с Legal &amp; Compliance по AML-кейсам">Collaborated with Legal &amp; Compliance on AML-related cases</li>
-          <li data-ru="Разбор сложных L2-инцидентов: зависшие транзакции, ошибки конверсий, рефанды, сбои API">Investigated complex L2 incidents: stuck transactions, conversion errors, refunds, partner API failures</li>
+          <li data-ru="Обрабатывал 30–50 обращений пользователей и партнёров в день (до 80+ в пиковые дни) через Zendesk, Telegram, Slack в рамках SLA: первый ответ до 3 минут, последующие до 10; первичная диагностика и эскалация на L2/L3 и QA">Handled 30–50 user and partner requests per day (80+ on peak days) via Zendesk, Telegram, Slack within SLA: first response up to 3 min, follow-ups up to 10 min; initial diagnostics and escalation to L2/L3 and QA</li>
+          <li data-ru="Разбирал сложные L2-инциденты (зависшие транзакции, ошибки конверсий, рефанды, сбои API партнёров): поиск первопричин через PostgreSQL, логи Grafana / Zabbix и Postman; эскалация на L3 и в разработку с шагами воспроизведения и фрагментами логов">Investigated complex L2 incidents (stuck transactions, conversion errors, refunds, partner API failures): root-cause analysis via PostgreSQL, Grafana / Zabbix logs, and Postman; escalated to L3/dev with reproduction steps and log excerpts</li>
           <li data-ru="На L2 закрывал задачи, переданные с L1, и отслеживал уведомления бирж (приостановка вводов и выводов, технические работы), оценивая влияние на сервис: ликвидность берётся с бирж">As L2: closed tasks escalated from L1; tracked exchange notices (deposit/withdrawal suspensions, maintenance) and assessed the impact on our service, since liquidity is sourced from exchanges</li>
-          <li data-ru="Поиск первопричин через PostgreSQL, логи Grafana / Zabbix и Postman">Root-cause analysis via PostgreSQL, Grafana, Zabbix logs, and Postman</li>
-          <li data-ru="Эскалация на L3 и в разработку с подробным описанием и шагами воспроизведения">Escalated to L3/dev with detailed reproduction steps and log excerpts</li>
-          <li data-ru="Связующее звено между Dev, QA, Compliance и Account Management">Technical bridge between Dev, QA, Compliance, and Account Management</li>
-          <li data-ru="Поддерживал базу знаний в Confluence; обучил двух сотрудников">Maintained knowledge base in Confluence; trained two team members</li>
-          <li data-ru="Стабильно держал показатели KPI на высоком уровне">Consistently kept KPI metrics at a high level</li>
           <li data-ru="Предложил правило рефандов для депозитов без обязательного идентификатора (memo); оно стало стандартом команды">Proposed a refund rule for deposits missing the required identifier (memo); it became the team standard</li>
           <li data-ru="Предложил категоризацию чатов в Zendesk по типу обращения; позже её внедрил тимлид">Proposed categorizing Zendesk chats by request type; the team lead later rolled it out</li>
+          <li data-ru="Работал с Legal &amp; Compliance по AML-кейсам; связующее звено между Dev, QA, Compliance и Account Management">Worked with Legal &amp; Compliance on AML-related cases; technical bridge between Dev, QA, Compliance, and Account Management</li>
+          <li data-ru="Поддерживал базу знаний в Confluence; обучил двух сотрудников">Maintained the knowledge base in Confluence; trained two team members</li>
+          <li data-ru="Держал показатели KPI на высоком уровне">Kept KPI metrics at a high level</li>
         </ul>
       </article>
 
@@ -176,7 +193,8 @@ Looking for a remote L1/L2 or adjacent technical role at an international compan
       <div class="kv"><span class="k mono">API</span><span>REST / Postman</span></div>
       <div class="kv"><span class="k mono" data-ru="Мониторинг">Monitoring</span><span>Grafana / Zabbix</span></div>
       <div class="kv"><span class="k mono" data-ru="Безопасность">Security</span><span>Komrad / Wazuh / MaxPatrol / PTAF / Wireshark</span></div>
-      <div class="kv"><span class="k mono" data-ru="Инфраструктура">Infrastructure</span><span>Linux / VMware vSphere / SSH / Containers</span></div>
+      <div class="kv"><span class="k mono" data-ru="Инфраструктура">Infrastructure</span><span>Linux (systemd, nginx, cron) / Docker, Docker Compose, LXC / VMware vSphere / SSH</span></div>
+      <div class="kv"><span class="k mono" data-ru="Автоматизация">Automation</span><span>Bash / Git / GitHub</span></div>
       <div class="kv"><span class="k mono" data-ru="Инструменты">Tools</span><span>Jira / Confluence / Zendesk / Slack / Blockchain Explorers</span></div>
       <div class="kv"><span class="k mono" data-ru="Домен">Domain</span><span>Fintech / Crypto / Web3</span></div>
       <div class="kv"><span class="k mono" data-ru="Языки">Languages</span><span data-ru="Английский B2 / Русский родной">English B2 / Russian Native</span></div>
@@ -187,7 +205,7 @@ Looking for a remote L1/L2 or adjacent technical role at an international compan
     <h2 data-ru="Образование">Education</h2>
     <div>
       <div class="kv">
-        <span class="k mono">2021 – 2024</span>
+        <span class="k mono">2020 – 2024</span>
         <span data-ru="Прикладная математика и информатика (неоконченное высшее)">Applied Mathematics &amp; CS (Incomplete)</span>
         <span class="p" data-ru="Южный федеральный университет">Southern Federal University</span>
       </div>
