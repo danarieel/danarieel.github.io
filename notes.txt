@@ -1,5 +1,0 @@
-2026-11 — резюме v1 готово (1 стр., тёмный фон, RU/EN из index.html через make_pdf.py).
-TODO после полировки проектов (bash-report, nginx/systemd, Postgres+Grafana, lorequest):
-- расширить блок Projects: краткий список + ссылки, всё ещё на 1 страницу.
-- формат на проект: 1 строка описания + стек + ссылка на репо/README.
-- если не влезает — сокращать Profile и SOC-блок, не Projects.
