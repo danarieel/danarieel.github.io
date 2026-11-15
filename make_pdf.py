@@ -32,7 +32,6 @@ REDACT = [
     (re.compile(r'\(memo\)', re.I), ''),
 ]
 
-
 def scrub(s: str) -> str:
     for rx, rep in REDACT:
         s = rx.sub(rep, s)
@@ -41,29 +40,25 @@ def scrub(s: str) -> str:
     s = re.sub(r'\b([A-Za-zА-Яа-я/ ]+?):\s*\1\b', r'\1:', s, flags=re.I)
     return s
 
-
 for reg, bold in FONT_SETS:
     if os.path.exists(reg) and os.path.exists(bold):
         pdfmetrics.registerFont(TTFont('R', reg, asciiReadable=True))
         pdfmetrics.registerFont(TTFont('B', bold, asciiReadable=True))
         break
 else:
-    sys.exit('Не найден шрифт с кириллицей: поставь Liberation Sans или DejaVu Sans.')
+    sys.exit('Не найден шрифт с кириллицей.')
 
 WHITE = HexColor('#E8E6E1')
 DIM = HexColor('#9AA0A6')
 ACCENT = HexColor('#E0A030')
-INK = HexColor('#14161A')
 LINE = HexColor('#2A2E35')
 BG = HexColor('#0D0F12')
 
 soup = BeautifulSoup(open(SRC, encoding='utf-8').read(), 'html.parser')
 
-
 def T(el, l):
     t = el.get('data-ru') if (l == 'ru' and el.has_attr('data-ru')) else el.get_text(' ', strip=True)
     return escape(scrub(t.strip()))
-
 
 def sec(*names):
     for x in soup.find_all('section'):
@@ -72,13 +67,12 @@ def sec(*names):
             return x
     return None
 
-
 def build(l, out, scale=1.0):
     def st(n, **k):
         return ParagraphStyle(n, fontName=k.pop('f', 'R'), fontSize=k.pop('s', 9.3) * scale,
                               leading=k.pop('ld', 12.4) * scale, textColor=k.pop('c', WHITE), **k)
 
-    body, small = st('b'), st('s', c=DIM, s=9, ld=12)
+    small = st('s', c=DIM, s=9, ld=12)
     h2 = st('h', f='B', s=8, c=ACCENT, spaceBefore=14, spaceAfter=4, ld=10)
     bul = st('bl', leftIndent=10, bulletIndent=0, spaceBefore=2.5, c=WHITE, ld=12.2)
 
@@ -89,8 +83,7 @@ def build(l, out, scale=1.0):
         flow = []
         arts = section.find_all('article')
         for i, job in enumerate(arts):
-            if i > 0:
-                flow.append(Spacer(1, 10))
+            if i > 0: flow.append(Spacer(1, 8))
             row = Table([[Paragraph(T(job.find('h3'), l), st('j', f='B')),
                           Paragraph(T(job.find('span', class_='date'), l), st('d', c=DIM, s=8.5, alignment=2))]],
                         colWidths=[None, 40 * mm])
@@ -98,8 +91,7 @@ def build(l, out, scale=1.0):
                                      ('TOPPADDING', (0, 0), (-1, -1), 4), ('BOTTOMPADDING', (0, 0), (-1, -1), 0)]))
             flow += [row]
             co = job.find('p', class_='co')
-            if co is not None:
-                flow += [Paragraph(T(co, l), small)]
+            if co is not None: flow += [Paragraph(T(co, l), small)]
             flow += [Paragraph(T(li, l), bul, bulletText='–') for li in job.find_all('li')]
         return flow
 
@@ -177,17 +169,15 @@ def build(l, out, scale=1.0):
     except ImportError:
         return 1
 
-
 def build_fit(l, out):
     scale = 1.0
     while True:
         pages = build(l, out, scale)
-        if pages == 1 or scale <= 0.84:
+        if pages == 1 or scale <= 0.80: # Понизил порог до 0.80, так как текста стало больше
             break
         scale = round(scale - 0.02, 2)
     note = '' if pages == 1 else '  <-- НЕ ВЛЕЗЛО, сократи текст в index.html'
     print('%s: %d стр., масштаб шрифта %.2f%s' % (os.path.basename(out), pages, scale, note))
-
 
 build_fit('en', os.path.join(HERE, 'vitalyv_cv_en.pdf'))
 build_fit('ru', os.path.join(HERE, 'vitalyv_cv_ru.pdf'))
