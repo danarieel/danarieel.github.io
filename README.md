@@ -5,15 +5,41 @@
 ---
 
 ## Русский
-Сайт-визитка и портфолио. Сгенерирован из HTML/CSS/JS, PDF-версии резюме собираются скриптом на Python.
+Статический сайт на HTML, CSS и vanilla JS, без сборки. PDF-версии резюме собираются скриптом на Python.
 
-**Стек:** HTML, CSS, JavaScript, Python (ReportLab).
+**Структура:**
+- `index.html` — сайт и тексты (RU/EN).
+- `make_pdf.py` — скрипт для генерации PDF.
+- `vitalyv_cv_ru.pdf`, `vitalyv_cv_en.pdf` — сгенерированные файлы.
+
+**Как собрать PDF:**
+1. Установите зависимости: `pip install -r requirements.txt`
+2. Запустите: `python make_pdf.py`
+
+**Как открыть сайт локально:**
+Просто откройте файл `index.html` в браузере.
+
 **Ссылка:** [danarieel.github.io](https://danarieel.github.io)
+
+**Лицензия:** MIT
 
 ---
 
 ## English
-Personal CV and portfolio site. Built with HTML/CSS/JS, PDF resumes are generated via a Python script.
+Static site built with HTML, CSS, and vanilla JS, no build step. PDF resume versions are generated via a Python script.
 
-**Stack:** HTML, CSS, JavaScript, Python (ReportLab).
+**Structure:**
+- `index.html` — site and texts (RU/EN).
+- `make_pdf.py` — PDF generation script.
+- `vitalyv_cv_ru.pdf`, `vitalyv_cv_en.pdf` — generated files.
+
+**How to build PDFs:**
+1. Install dependencies: `pip install -r requirements.txt`
+2. Run: `python make_pdf.py`
+
+**How to open the site locally:**
+Just open `index.html` in your browser.
+
 **Link:** [danarieel.github.io](https://danarieel.github.io)
+
+**License:** MIT
