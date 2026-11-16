@@ -36,7 +36,8 @@ ACCENT = HexColor('#E0A030')
 BG = HexColor('#0D0F12')
 LINE = HexColor('#2A2E35')
 
-soup = BeautifulSoup(open(SRC, encoding='utf-8').read(), 'html.parser')
+with open(SRC, encoding='utf-8') as f:
+    soup = BeautifulSoup(f.read(), 'html.parser')
 
 
 def T(el, l):
@@ -62,7 +63,7 @@ def build(l, out, scale=1.0):
 
     small = st('s', c=DIM, s=9, ld=12)
     h2 = st('h', f='B', s=8, c=ACCENT, spaceBefore=14, spaceAfter=4, ld=10)
-    bul = st('bl', leftIndent=10, bulletIndent=0, spaceBefore=2.5, c=WHITE, ld=12.2)
+    bul = st('bl', leftIndent=10, bulletIndent=0, spaceBefore=2.5, c=WHITE, ld=12.2, bulletFontName='R')
 
     def head(t):
         """Формирует заголовок секции."""
@@ -75,9 +76,24 @@ def build(l, out, scale=1.0):
         for i, job in enumerate(arts):
             if i > 0:
                 flow.append(Spacer(1, 8))
-            row = Table([[Paragraph(T(job.find('h3'), l), st('j', f='B')),
-                          Paragraph(T(job.find('span', class_='date'), l), st('d', c=DIM, s=8.5, alignment=2))]] if job.find('span', class_='date') else [[Paragraph(T(job.find('h3'), l), st('j', f='B'))]],
-                        colWidths=[None, 40 * mm] if job.find('span', class_='date') else [None])
+            
+            h3 = job.find('h3')
+            has_date = job.find('span', class_='date')
+            
+            h3_content = T(h3, l)
+            a_tag = h3.find('a')
+            if a_tag:
+                href = a_tag.get('href')
+                text = a_tag.get('data-ru') if (l == 'ru' and a_tag.has_attr('data-ru')) else a_tag.get_text(strip=True)
+                h3_content = f'<link href="{href}"><font color="#E0A030">{escape(text)}</font></link>'
+
+            if has_date:
+                row = Table([[Paragraph(h3_content, st('j', f='B')),
+                              Paragraph(T(has_date, l), st('d', c=DIM, s=8.5, alignment=2))]],
+                            colWidths=[None, 40 * mm])
+            else:
+                row = Table([[Paragraph(h3_content, st('j', f='B'))]], colWidths=[None])
+            
             row.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0), ('RIGHTPADDING', (0, 0), (-1, -1), 0),
                                      ('TOPPADDING', (0, 0), (-1, -1), 4), ('BOTTOMPADDING', (0, 0), (-1, -1), 0)]))
             flow += [row]
@@ -89,10 +105,17 @@ def build(l, out, scale=1.0):
 
     name = ' '.join(T(x, l) for x in soup.find('h1').find_all('span'))
     site = 'Site' if l == 'en' else 'Сайт'
+    
+    header_text = (
+        f"<link href='mailto:qbwrkr@gmail.com'>qbwrkr@gmail.com</link>  |  "
+        f"<link href='https://t.me/qbwrkr'>Telegram: @qbwrkr</link>  |  "
+        f"<link href='https://github.com/danarieel'>GitHub: github.com/danarieel</link>  |  "
+        f"<link href='https://danarieel.github.io'>{site}: danarieel.github.io</link>"
+    )
+
     H = [Paragraph(name, st('n', f='B', s=22, ld=25, c=WHITE)),
          Paragraph(T(soup.find('p', class_='role'), l), st('r', c=DIM, s=10, ld=13, spaceBefore=2)),
-         Paragraph('qbwrkr@gmail.com  |  Telegram: @qbwrkr  |  GitHub: github.com/danarieel  |  %s: danarieel.github.io' % site,
-                   st('c', c=DIM, s=8.0, spaceBefore=3)),
+         Paragraph(header_text, st('c', c=DIM, s=8.0, spaceBefore=3)),
          Spacer(1, 5), HRFlowable(width='100%', thickness=1.6, color=ACCENT, spaceAfter=0), Spacer(1, 4)]
 
     P = []
@@ -174,5 +197,6 @@ def build_fit(l, out):
     print('%s: %d стр., масштаб шрифта %.2f' % (os.path.basename(out), pages, scale))
 
 
-build_fit('en', os.path.join(HERE, 'vitalyv_cv_en.pdf'))
-build_fit('ru', os.path.join(HERE, 'vitalyv_cv_ru.pdf'))
+if __name__ == '__main__':
+    build_fit('en', os.path.join(HERE, 'vitalyv_cv_en.pdf'))
+    build_fit('ru', os.path.join(HERE, 'vitalyv_cv_ru.pdf'))
