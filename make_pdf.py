@@ -106,10 +106,11 @@ def build(l, out, scale=1.0):
     name = ' '.join(T(x, l) for x in soup.find('h1').find_all('span'))
     site = 'Site' if l == 'en' else 'Сайт'
     
+    projects_label = 'Projects' if l == 'en' else 'Проекты'
     header_text = (
         f"<link href='mailto:qbwrkr@gmail.com'>qbwrkr@gmail.com</link>  |  "
         f"<link href='https://t.me/qbwrkr'>Telegram: @qbwrkr</link>  |  "
-        f"<link href='https://github.com/danarieel'>GitHub: github.com/danarieel</link>  |  "
+        f"<link href='https://github.com/danarieel?tab=repositories'>{projects_label}: github.com/danarieel</link>  |  "
         f"<link href='https://danarieel.github.io'>{site}: danarieel.github.io</link>"
     )
 
